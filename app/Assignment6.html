@@ -1,0 +1,129 @@
+
+
+
+    
+<head>
+    <h1> Order Table</h1>
+        <!-- <script src="http://code.angularjs.org/1.2.6/angular.js"></script>  -->
+  
+        <style>
+                tbody {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+                
+                td, th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
+                
+                tr:nth-child(even) {
+                    background-color: #dddddd;
+                }
+                </style>
+
+
+
+
+</head>
+
+
+    <div  ng-controller="Ass6Controller">
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th>Checkbox</th>
+                <th>Order</th>
+                <th>Price</th>
+            </tr>
+
+                <tr ng-repeat="item in items">
+                <td><input type="checkbox" ng-model="item.isSelected" ng-change="value(item.isSelected,item)"{{item.order}} {{item.price}} /></td>
+                <td>{{item.order}}</td>     
+                <td>{{item.price}}</td>
+                </tr>
+
+            <!-- <tr ng-repeat="item in items">
+                <td><input type="checkbox" ng-model="item.isSelected" /></td>
+                <th>Order</th>
+                <th>Price:</th>
+                <td>{{item.order}}</td>     
+                <td>{{item.price}}</td>
+               
+            </tr> -->
+            <!-- <tr>
+                <td>Total:</td>
+                <td>{{getTotal('order')}}</td>
+                <td>{{getTotal('price')}}</td>
+               
+            </tr> -->
+
+
+               <tr>
+                   <td>Total:</td>
+                  <td></td>
+           <!-- <td>{{getprice}}</td> -->
+          <td> {{selectedItems| getprice}} </td>
+               </tr>
+        </tbody>
+    </table>
+
+    <!-- <div>Total Price {{selectedItems| getprice}}</div> -->
+</div>
+
+
+
+
+<!-- <script>
+
+
+var app = angular.module('plunker', []);
+
+app.controller('MainCtrl', function($scope) {
+    
+    $scope.items = [
+       { order: 'TV', price: 23},    
+        {order: 'Mobile', price: 23},
+        {order: 'Bag', price: 123}
+    ];
+    
+
+
+
+
+    $scope.selectedItems = [];
+    $scope.value = function (isSelected, item) {
+        if (isSelected == true) {
+            $scope.selectedItems.push(item);
+        } else {
+            console.log(item.order);
+            angular.forEach($scope.selectedItems, function (itemRmv, $index) {
+                if (itemRmv.order == item.order) {
+                    $scope.selectedItems.splice($index, 1);
+                }
+            })
+        }
+    }
+});
+
+app.filter('getprice', function () {
+    return function (value, property) {
+        var total = 0;
+        angular.forEach(value, function (val, index) {
+            total = total + parseInt(val.price)
+        });
+        return total;
+    }
+});
+    // $scope.getTotal = function(type) {
+    //     var total = 0;
+    //     angular.forEach($scope.items, function(el) {
+    //         total += el[type];
+    //     });
+    //     return total;
+    // };
+
+    </script> -->
+

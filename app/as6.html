@@ -1,0 +1,85 @@
+<html>
+    <head>
+          <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+        </head>
+    <body>
+<div ng-app="app">
+     <h2>Order List</h2>
+
+    <div ng-controller="startCtrl">
+     
+      <table border ="0">
+          <tr>
+          <th>Checkbox</th>
+          <th>Order</th>
+          <th>Price</th>
+        </tr>
+
+        <td>
+   <div ng-repeat="x in names">
+            <input type="checkbox" ng-model="item.isSelected" ng-change="value(item.isSelected,x)" /></div>
+   </td>
+     <td>
+   
+    </td>
+
+
+     <td>
+    <div ng-repeat="y in selectedItems" ng-show="selectedItems.length>0">{{y.price} </div>
+    </td>
+
+        </table>
+
+        <div ng-repeat="x in names">
+            <input type="checkbox" ng-model="item.isSelected" ng-change="value(item.isSelected,x)" />{{x.name}} {{x.price}}</div>
+        <hr/>
+        
+        <div>Selected Item</div>
+        <div ng-repeat="y in selectedItems" ng-show="selectedItems.length>0">{{y.name}}----{{y.price}}</div>
+        <div ng-show="selectedItems.length<=0">No item selected</div>
+<br>
+           <div>Total Price {{selectedItems| getprice}}</div>
+    </div>
+</div>
+
+
+<script>
+var app = angular.module("app", []);
+app.controller("startCtrl", function ($scope) {
+    $scope.names = [{
+        name: "Tv",
+        price: "100"
+    }, {
+        name: "Mobile",
+        price: "200"
+    }, {
+        name: "bag",
+        price: "50"
+    }];
+    $scope.selectedItems = [];
+    $scope.value = function (isSelected, item) {
+        if (isSelected == true) {
+            $scope.selectedItems.push(item);
+        } else {
+            console.log(item.name);
+            angular.forEach($scope.selectedItems, function (itemRmv, $index) {
+                if (itemRmv.name == item.name) {
+                    $scope.selectedItems.splice($index, 1);
+                }
+            })
+        }
+    }
+});
+
+app.filter('getprice', function () {
+    return function (value, property) {
+        var total = 0;
+        angular.forEach(value, function (val, index) {
+            total = total + parseInt(val.price)
+        });
+        return total;
+    }
+});
+</script>
+    </body>
+</html>

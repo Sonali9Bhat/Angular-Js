@@ -1,0 +1,18 @@
+
+      <div ng-controller = "Ass4Controller">
+               Enter first name:
+               <input type = "text" ng-model = "student.firstName">
+               Enter last name: 
+           <input type = "text" ng-model = "student.lastName">
+            Enter Amount: 
+           <input type = "number" ng-model = "student.amount">
+            
+          
+       <p>  Name in Upper Case: {{student.fullName() | uppercase}} </p><br>
+
+       <p>  Name in Lower Case: {{student.fullName() | lowercase}} </p> <br>
+       <p>  Amount in currency :{{student.FilterAmount() | currency}} </p>
+         
+      </div>
+      
+    
